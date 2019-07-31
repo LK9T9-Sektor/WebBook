@@ -1,0 +1,23 @@
+﻿@model IEnumerable<WebBook.Models.History>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Выберите отчет</h2>
+
+<div id="qrCode" class="form-group">
+
+    <form method="get" action="CurrentlyTaken" style="display:inline">
+        <input type="submit" value="Количество книг" class="btn" />
+    </form>
+
+    <form method="get" action="Turnover" style="display:inline">
+        <input type="submit" value="Оборот книги" class="btn" />
+    </form>
+
+    <form method="get" action="PeriodHistory" style="display:inline">
+        <input type="submit" value="История за период" class="btn" />
+    </form>
+</div>
+

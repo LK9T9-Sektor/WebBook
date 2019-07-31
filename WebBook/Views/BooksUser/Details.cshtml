@@ -1,0 +1,111 @@
+﻿@model WebBook.Models.Books
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Описание</h2>
+
+<div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td width="20%">
+                    @if (Model.Picture != null)
+                    {
+                        <img style='width:100%; height:auto; max-width:320px' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Picture))" />
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.Picture)
+                    }
+                </td>
+                <td>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Category)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Category)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Author)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Author)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Publish)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Publish)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PublishNumber)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.PublishNumber)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Publisher)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Publisher)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Pages)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Pages)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Isbn)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Isbn)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Barcode)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Barcode)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.RegDate)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.RegDate)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.OutDate)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.OutDate)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Issued)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Issued)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+                    </dl>
+                </td>
+        </tbody>
+    </table>
+</div>
+<hr />
+<div>
+    <a asp-action="Index">Назад к списку</a>
+</div>

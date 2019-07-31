@@ -1,0 +1,38 @@
+﻿@model WebBook.ViewModels.LoginModel
+
+@{
+    ViewData["Title"] = "Авторизация";
+}
+
+<div class="text-center">
+    <h1 class="display-4"><b>Книжная библиотека</b></h1>
+</div>
+
+@if (User.Identity.IsAuthenticated != true)
+{
+    <fieldset align ="center">
+        <form asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div>
+                <div class="form-group">
+                    <label asp-for="Email">Введите Email</label><br />
+                    <input type="text" asp-for="Email" />
+                    <p><span asp-validation-for="Email" class="text-danger"></span></p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">Введите пароль</label><br />
+                    <input asp-for="Password" />
+                    <p><span asp-validation-for="Password" class="text-danger"></span></p>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Войти" />
+                    <a asp-action="Register" asp-controller="Account">Регистрация</a>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

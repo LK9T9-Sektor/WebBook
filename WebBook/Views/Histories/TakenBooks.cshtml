@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebBook.Models.History>
+
+@{
+    ViewData["Title"] = "TakenBooks";
+}
+
+<h2>История</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Issue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @if (item.User.Email == User.Identity.Name)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Book.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Book.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Issue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReturnDate)
+                    </td>
+                    <td>
+                        @if (item.ReturnDate == null)
+                        {
+                            <form asp-action="Return" asp-route-id="@item.Id">
+                                <div class="form-group">
+                                    <input type="submit" value="Сдать" class="btn" />
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-action="Return" asp-route-id="@item.Id">
+                                <div class="form-group">
+                                    <input disabled type="submit" value="Сдать" class="btn" />
+                                </div>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

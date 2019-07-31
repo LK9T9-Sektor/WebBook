@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebBook.Models.History>
+
+@{
+    ViewData["Title"] = "CurrentlyTaken";
+}
+<h2>Количество книг на руках</h2>
+
+<div id="qrCode" class="form-group">
+
+    <form method="get" action="CurrentlyTaken" style="display:inline">
+        <input type="submit" value="Количество книг" class="btn" />
+    </form>
+
+    <form method="get" action="Turnover" style="display:inline">
+        <input type="submit" value="Оборот книги" class="btn" />
+    </form>
+
+    <form method="get" action="PeriodHistory" style="display:inline">
+        <input type="submit" value="История за период" class="btn" />
+    </form>
+</div>
+
+<h3>Книг взято на данный момент: @ViewData["Message"]</h3>
+<form asp-action="PrintTaken">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Issue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Issue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Book.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Email)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div align="right">
+        <button>Версия для печати</button>
+    </div>
+</form>

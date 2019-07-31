@@ -1,0 +1,111 @@
+﻿@model IEnumerable<WebBook.Models.Books>
+@{
+    ViewData["Title"] = "Списание";
+}
+<h2>Списание книги</h2>
+
+<div class="table-responsive" style="max-width: 100%; overflow: auto;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Picture)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Isbn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Barcode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RegDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OutDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Issued)
+                </th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (var item in Model)
+                {
+                    <form asp-action="WriteOff">
+                <tr>
+                    @if (item.Issued == false && item.OutDate == null)
+                    {
+                        <input type="hidden" asp-for=@item.Id />
+                        <input type="hidden" asp-for=@item.Name />
+                        <input type="hidden" asp-for=@item.Picture />
+                        <input type="hidden" asp-for=@item.Category />
+                        <input type="hidden" asp-for=@item.Author />
+                        <input type="hidden" asp-for=@item.Description />
+                        <input type="hidden" asp-for=@item.Publish />
+                        <input type="hidden" asp-for=@item.PublishNumber />
+                        <input type="hidden" asp-for=@item.Publisher />
+                        <input type="hidden" asp-for=@item.Pages />
+                        <input type="hidden" asp-for=@item.Isbn />
+                        <input type="hidden" asp-for=@item.Barcode />
+                        <input type="hidden" asp-for=@item.RegDate />
+                        <input type="hidden" asp-for=@item.Issued />
+                        <td>
+                            @if (item.Picture != null)
+                            {
+                                <img style='width:100px; height:151px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Picture))" />
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.Picture)
+                            }
+                        </td>
+                        <td class="form-group">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td class="form-group">
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </td>
+                        <td class="form-group">
+                            @Html.DisplayFor(modelItem => item.Author)
+                        </td>
+                        <td class="form-group">
+                            @Html.DisplayFor(modelItem => item.Isbn)
+                        </td>
+                        <td class="form-group">
+                            @Html.DisplayFor(modelItem => item.Barcode)
+                        </td>
+                        <td class="form-group">
+                            @Html.DisplayFor(modelItem => item.RegDate)
+                        </td>
+                        <td class="form-group">
+                            <input asp-for=@item.OutDate class="form-control" />
+                            <span asp-validation-for=@item.OutDate class="text-danger"></span>
+                        </td>
+                        <td class="form-group">
+                            @Html.DisplayFor(modelItem => item.Issued)
+                        </td>
+                        <td class="form-group">
+                            <input type="submit" value="Списать" class="btn btn-default" />
+                        </td>
+                    }
+                </tr>
+                </form>
+            }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebBook.Models.Books>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Список книг</h2>
+
+<p>
+    <a asp-action="Create">Добавить книгу</a>
+</p>
+
+<div class="table-responsive" style="max-width: 100%; overflow: auto;">
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @if (item.Picture != null)
+                    {
+                        <td width="20%">
+                            <img style='width: 100%; height: auto; max-width: 320px' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Picture))" />
+                        </td>
+                    }
+                    else
+                    {
+                        <td width="20%">
+                            @Html.DisplayFor(modelItem => item.Picture)
+                        </td>
+                    }
+                    <td width="50%">
+                        <p>
+                            <h2>
+                                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+                            </h2>
+                        </p>
+                        <p>
+                            <b>@Html.DisplayFor(modelItem => item.Author)</b>
+                        </p>
+                        <p>
+                            @Html.DisplayNameFor(modelItem => item.Publisher): @Html.DisplayFor(modelItem => item.Publisher)
+                        </p>
+                        <p>
+                            @Html.DisplayNameFor(modelItem => item.PublishNumber): @Html.DisplayFor(modelItem => item.PublishNumber)
+                        </p>
+                        <p>
+                            @Html.DisplayNameFor(modelItem => item.Pages): @Html.DisplayFor(modelItem => item.Pages)
+                        </p>
+                        <hr />
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </p>
+                        <hr />
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a> |                            
+                            <a asp-action="Index" asp-controller="Histories" asp-route-id="@item.Id">Список книгодержателей</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

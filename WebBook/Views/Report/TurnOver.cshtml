@@ -1,0 +1,79 @@
+﻿@model IEnumerable<WebBook.Models.History>
+
+@{
+    ViewData["Title"] = "TurnOver";
+}
+
+<h2>Оборачиваемость книги</h2>
+
+<div id="qrCode" class="form-group">
+
+    <form method="get" action="CurrentlyTaken" style="display:inline">
+        <input type="submit" value="Количество книг" class="btn" />
+    </form>
+
+    <form method="get" action="Turnover" style="display:inline">
+        <input type="submit" value="Оборот книги" class="btn" />
+    </form>
+
+    <form method="get" action="PeriodHistory" style="display:inline">
+        <input type="submit" value="История за период" class="btn" />
+    </form>
+</div>
+
+<h3>Установите период и выберете книгу</h3>
+<form asp-action="Turnover">
+    <input type="date" name="FirtsDate" />
+    <input type="date" name="SecondDate" />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book.Author)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book.Barcode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Issue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReturnDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Book.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Book.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Book.Barcode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Issue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReturnDate)
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input asp-route-id="@item.Book.Id" type="submit" value="Выбрать" class="btn" />
+                            <input asp-action="PrintTurnover" asp-route-id="@item.Book.Id" type="submit" value="Версия для печати" class="btn" />
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebBook.Models.Books>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="errorMessageDiv" runat="server"></div>
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="20%">
+                    @if (item.Picture != null)
+                    {
+                        <img style='width:100%; height:auto; max-width: 320px' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Picture))" />
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Picture)
+                    }
+                </td>
+                <td width="50%">
+                    <p>
+                        <h2>
+                            <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+                        </h2>
+                    </p>
+                    <p>
+                        <b>
+                            @Html.DisplayFor(modelItem => item.Author)
+                        </b>
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(modelItem => item.Publisher): @Html.DisplayFor(modelItem => item.Publisher)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(modelItem => item.PublishNumber): @Html.DisplayFor(modelItem => item.PublishNumber)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(modelItem => item.Pages): @Html.DisplayFor(modelItem => item.Pages)
+                    </p>
+                    <hr />
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </p>
+                    <hr />
+                    <div align="right">
+                        @if (item.Issued == false)
+                        {
+                            <form asp-action="Take" asp-route-id="@item.Id">
+                                <div class="form-group">
+                                    <input type="submit" value="Взять" class="btn" />
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-action="Take" asp-route-id="@item.Id">
+                                <div class="form-group">
+                                    <input disabled type="submit" value="Взять" class="btn" />
+                                </div>
+                            </form>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
